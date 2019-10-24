@@ -9,9 +9,9 @@ resource "aws_cloudwatch_event_rule" "calculator" {
 }
 
 resource "aws_cloudwatch_event_target" "health_monitor_event_target" {
-  rule = "${aws_cloudwatch_event_rule.calculator.id}"
-  arn = "${aws_sfn_state_machine.calculator-state-machine.id}"
-  role_arn = "${aws_iam_role.iam_for_sfn.arn}"
+  rule = aws_cloudwatch_event_rule.calculator.id
+  arn = aws_sfn_state_machine.calculator-state-machine.id
+  role_arn = aws_iam_role.iam_for_sfn.arn
   input = <<EOF
   {
   "operand1": "3",

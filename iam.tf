@@ -20,7 +20,7 @@ EOF
 
 resource "aws_iam_role_policy" "dynamoDB-put" {
   name        = "tf-${terraform.workspace}-dynamoDB-put"
-  role   = "${aws_iam_role.iam_for_lambda.id}"
+  role   = aws_iam_role.iam_for_lambda.id
 
   policy = <<EOF
 {
@@ -42,7 +42,7 @@ EOF
 resource "aws_iam_role" "iam_for_sfn" {
   name = "tf-${terraform.workspace}-iam_for_sfn"
 
-  assume_role_policy = "${data.aws_iam_policy_document.sfn_assume_role_policy_document.json}"
+  assume_role_policy = data.aws_iam_policy_document.sfn_assume_role_policy_document.json
 }
 
 
@@ -69,7 +69,7 @@ data "aws_iam_policy_document" "sfn_assume_role_policy_document" {
 
 resource "aws_iam_role_policy" "lambda-execution" {
   name        = "tf-${terraform.workspace}-lambda-execution"
-  role   = "${aws_iam_role.iam_for_sfn.id}"
+  role   = aws_iam_role.iam_for_sfn.id
 
   policy = <<EOF
 {
