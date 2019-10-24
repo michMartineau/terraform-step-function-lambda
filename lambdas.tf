@@ -10,8 +10,8 @@ resource "aws_lambda_function" "addition" {
   function_name    = "tf-${terraform.workspace}-addition"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "addition.handler"
-  source_code_hash = base64sha256(file("lambdas.zip"))
-  runtime          = "nodejs6.10"
+  source_code_hash = fileexists("lambdas.zip") ? base64sha256(filebase64("lambdas.zip")) : null
+  runtime          = var.runtime
   depends_on = ["data.archive_file.lambdas"]
 }
 
@@ -20,8 +20,8 @@ resource "aws_lambda_function" "division" {
   function_name    = "tf-${terraform.workspace}-division"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "division.handler"
-  source_code_hash = base64sha256(file("lambdas.zip"))
-  runtime          = "nodejs6.10"
+  source_code_hash = fileexists("lambdas.zip") ? base64sha256(filebase64("lambdas.zip")) : null
+  runtime          = var.runtime
 
   depends_on = ["data.archive_file.lambdas"]
 }
@@ -31,8 +31,8 @@ resource "aws_lambda_function" "fetchAndCheck" {
   function_name    = "tf-${terraform.workspace}-fetchAndCheck"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "fetchAndCheck.handler"
-  source_code_hash = base64sha256(file("lambdas.zip"))
-  runtime          = "nodejs6.10"
+  source_code_hash = fileexists("lambdas.zip") ? base64sha256(filebase64("lambdas.zip")) : null
+  runtime          = var.runtime
 
   depends_on = ["data.archive_file.lambdas"]
 }
@@ -42,8 +42,8 @@ resource "aws_lambda_function" "insertInDB" {
   function_name    = "tf-${terraform.workspace}-insertInDB"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "insertInDB.handler"
-  source_code_hash = base64sha256(file("lambdas.zip"))
-  runtime          = "nodejs6.10"
+  source_code_hash = fileexists("lambdas.zip") ? base64sha256(filebase64("lambdas.zip")) : null
+  runtime          = var.runtime
 
   environment {
     variables = {
@@ -59,8 +59,8 @@ resource "aws_lambda_function" "multiplication" {
   function_name    = "tf-${terraform.workspace}-multiplication"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "multiplication.handler"
-  source_code_hash = base64sha256(file("lambdas.zip"))
-  runtime          = "nodejs6.10"
+  source_code_hash = fileexists("lambdas.zip") ? base64sha256(filebase64("lambdas.zip")) : null
+  runtime          = var.runtime
   depends_on = ["data.archive_file.lambdas"]
 }
 
@@ -69,8 +69,8 @@ resource "aws_lambda_function" "subtraction" {
   function_name    = "tf-${terraform.workspace}-subtraction"
   role             = aws_iam_role.iam_for_lambda.arn
   handler          = "subtraction.handler"
-  source_code_hash = base64sha256(file("lambdas.zip"))
-  runtime          = "nodejs6.10"
+  source_code_hash = fileexists("lambdas.zip") ? base64sha256(filebase64("lambdas.zip")) : null
+  runtime          = var.runtime
 
   depends_on = ["data.archive_file.lambdas"]
 }

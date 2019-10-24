@@ -2,3 +2,6 @@
 .idea/
 **/*.tfstate
 **/*.backup
+/lambdas.zip
+/plan.txt
+/.terraform.tfstate.lock.info
