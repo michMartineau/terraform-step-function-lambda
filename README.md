@@ -1,8 +1,8 @@
-This project is a playground in order.
+This project aims to test the creation of the AWS step function service with terraform.
 
-##Requirements
-aws-cli/1.16.266
-Terraform v0.12.12
+## Requirements
+* aws-cli 1.16.266
+* Terraform v0.12.12
 
 ## AWS Configuration
 You have to configure your aws credential.
